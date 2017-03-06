@@ -78,7 +78,7 @@ setInterval(
 			
 	 }
 
-, 1500);
+, 2000);
 
 window.onload = function() {
 
@@ -134,7 +134,7 @@ function stopLed() {
 
 function sendText() {
 	// body...
-	var m = $("#msgInput").value;
+	var m = $("#msgInput").val();
 	letexte ( m);
 	$("#msgInput").val("");
 	// alert("kmkmk");

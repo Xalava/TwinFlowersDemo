@@ -26,7 +26,8 @@ var humidityPrec = 30;
 var temperaturePrec = 30;
 var sonPrec = 30;
 var wioToken = "?access_token=13f643a259dfd43388885f7220aa1b91";
-var serverURL = "https://us.wio.seeed.io/v1/node/"
+var serverURL = "https://us.wio.seeed.io/v1/node/";
+var cligno;
 
 // update values
 setInterval(
@@ -61,18 +62,18 @@ setInterval(
 
     	});
 
-			$.get(serverURL + "GroveSoundA0/sound_level" + wioToken, function(data, status){
-    		var son = (data.sound_level+sonPrec)/2;
+			// $.get(serverURL + "GroveSoundA0/sound_level" + wioToken, function(data, status){
+   //  		var son = (data.sound_level+sonPrec)/2;
 
-			$(".son").html(son.toString());
+			// $(".son").html(son.toString());
 
-    		$('.son-bar').css('width', son+'%');
-    		if (son>200){
-					$('.son-bar').css('background-color',"red");
-				}
-			sonPrec = data.sound_level;	
+   //  		$('.son-bar').css('width', son+'%');
+   //  		if (son>200){
+			// 		$('.son-bar').css('background-color',"red");
+			// 	}
+			// sonPrec = data.sound_level;	
 
-    	});
+   //  	});
 
 			
 	 }
@@ -108,6 +109,27 @@ function lacouleurBleu(){
 
 
 }
+
+function clignoLed() {
+	// f
+	var i = 1;
+	var cligno = setInterval(
+		function(){
+			$.post(serverURL + "GenericDOutD2/onoff/"+ i + wioToken);
+			i = 1-i;
+		},
+		800
+	);
+
+
+}
+
+function stopLed() {
+
+	clearInterval(cligno);
+	$.post(serverURL + "GenericDOutD2/onoff/0"+  wioToken);
+}
+
 
 
 function sendText() {

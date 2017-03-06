@@ -25,8 +25,8 @@ window.onload = function() {
 var humidityPrec = 30;
 var temperaturePrec = 30;
 var sonPrec = 30;
-var wioToken = "?access_token=e16195696512ece1c990eb3f3552b24a";
-var serverURL = "https://cn.wio.seeed.io/v1/node/"
+var wioToken = "?access_token=13f643a259dfd43388885f7220aa1b91";
+var serverURL = "https://us.wio.seeed.io/v1/node/"
 
 // update values
 setInterval(

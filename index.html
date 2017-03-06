@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Les Bricodeurs</title>
+        <title>Fleurs Jumelles - Démo Tests</title>
         <meta name="description" content="">
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -24,11 +24,10 @@
                     <div class="col-xs-8">
                         <h1>Fleurs Jumelles</h1>
                         <h5>Les Usines Louise & Xavier Lavayssière<i><span id="sculptureName"></span></i></h5>
+                        <h6><i>Demo tests</i></h6>
                     </div>
                     <div class="col-xs-2"></div>
                     <div class="col-xs-2">
-                        <img class="img-circle img-responsive" src="img/ChatNoel.png">
-
                     </div>
                 </div>
                 <div class="row">
@@ -75,7 +74,7 @@
             </section>
 
 
-            <section>
+<!--             <section>
                 <div class="row">
                     <div class="col-xs-8 col-xs-offset-2 applaudim">
                         <br/>
@@ -89,15 +88,35 @@
                         </div>
 
                     </div>   
-                </div> <!--row-->
-            </section>
+                </div> 
+            </section> -->
 
 
             <section>
                 <div class="row">
                     <div class="col-xs-8 col-xs-offset-2 applaudim">
                         <br/>
-                         <button class="btn-default btn-lg btn-warning" onclick="vibration()">Faire vibrer</button>
+                        <button class="btn-default btn-lg btn-success" onclick="vibration(2000)">Faire vibrer 2 sec</button>
+                        <button class="btn-default btn-lg btn-success" onclick="vibration(500)">Faire vibrer 500ms</button>
+                        <button class="btn-default btn-lg btn-danger" onclick="vibrationOff()">stopper vibration</button>
+                        <button class="btn-default btn-lg btn-warning" onclick="vibrationSafe(2000)">vibration failproof a tester</button>
+
+                        <br/><br/>
+                    </div>
+                </div> 
+            </section>
+
+            <section>
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2 applaudim">
+                        <br/>
+                        <form>
+                            <div class="form-group">
+                              <label for="msgInput">Message to send</label>
+                              <input type="text" class="form-control" id="msgInput">
+                            </div>
+                            <button onclick="sendText()" class="btn btn-default btn-lg btn-primary">Envoyer</button>
+                        </form> 
                         <br/><br/>
                     </div>
                 </div> 

@@ -25,13 +25,14 @@ window.onload = function() {
 var humidityPrec = 30;
 var temperaturePrec = 30;
 var sonPrec = 30;
-var wioToken = "98e57b91fe32bc713e29f443e810b69e";
+var wioToken = "?access_token=e16195696512ece1c990eb3f3552b24a";
+var serverURL = "https://cn.wio.seeed.io/v1/node/"
 
 // update values
 setInterval(
 	function(){ 
     
-		$.get("https://us.wio.seeed.io/v1/node/GroveTempHumD0/humidity?access_token="+wioToken, function(data, status){
+		$.get(serverURL + "GroveTempHumD0/humidity" + wioToken, function(data, status){
         	// alert("Data: " + data + "\nStatus: " + status);
         	var hum = (data.humidity+humidityPrec)/2;
 
@@ -47,7 +48,7 @@ setInterval(
 		
     	});
 
-		$.get("https://us.wio.seeed.io/v1/node/GroveTempHumD0/temperature?access_token="+wioToken, function(data, status){
+		$.get(serverURL + "GroveTempHumD0/temperature" + wioToken, function(data, status){
     		var temp = (data.celsius_degree+temperaturePrec)/2-2;
 
 			$(".temp").html(temp.toString());
@@ -60,7 +61,7 @@ setInterval(
 
     	});
 
-			$.get("https://us.wio.seeed.io/v1/node/GroveSoundA0/sound_level?access_token="+wioToken, function(data, status){
+			$.get(serverURL + "GroveSoundA0/sound_level" + wioToken, function(data, status){
     		var son = (data.sound_level+sonPrec)/2;
 
 			$(".son").html(son.toString());
@@ -86,63 +87,85 @@ window.onload = function() {
 
 // library
 function lacouleurRouge(){
-	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/250/0/0?access_token="+wioToken)
+	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/250/0/0" + wioToken)
 
 
 }
 function lacouleurBlanche(){
-	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/250/250/250?access_token="+wioToken)
+	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/250/250/250" + wioToken)
 
 
 }
 
 function lacouleurVerte(){
-	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/0/250/0?access_token="+wioToken)
+	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/0/250/0" + wioToken)
 
 
 }
 
 function lacouleurBleu(){
-	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/0/0/250?access_token="+wioToken)
+	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/0/0/250" + wioToken)
 
 
 }
 
 
-function letexte(){
-		$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/string/0/0/Merci?access_token="+wioToken)
+function sendText() {
+	// body...
+	var m = $("#msgInput").value;
+	letexte ( m);
+	$("#msgInput").val("");
+	// alert("kmkmk");
 
 }
 
-function vibration(){
+function letexte(s){
+		$.post(serverURL + "GroveLCDRGBI2C0/string/0/0/"+ s + wioToken)
+}
 
-
-	$.post("https://us.wio.seeed.io/v1/node/GenericDOutD2/onoff/1?access_token="+wioToken)
-	//strombo
-	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/250/10/10?access_token="+wioToken)
-	setTimeout(function(){	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/10/250/10?access_token="+wioToken)
-	}, 600);
-	setTimeout(function(){	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/10/10/250?access_token="+wioToken)
-	}, 1200);
-
-
-	setTimeout(function(){
-		$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/250/10/10?access_token="+wioToken)
-		setTimeout(function(){	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/10/250/10?access_token="+wioToken)
-		}, 400);
-		setTimeout(function(){	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/10/10/250?access_token="+wioToken)
-		}, 800);
-		setTimeout(function(){	$.post("https://us.wio.seeed.io/v1/node/GroveLCDRGBI2C0/backlight_color_rgb/0/0/0?access_token="+wioToken)
-		}, 1200);
-
-	},1800);
-
+function vibration(t){
+	$.post(serverURL + "GenericDOutD2/onoff/1" + wioToken)
 	//end vibration
- 	setTimeout(function(){$.post("https://us.wio.seeed.io/v1/node/GenericDOutD2/onoff/0?access_token="+wioToken)
-	}, 2400);
+ 	setTimeout(function(){$.post(serverURL + "GenericDOutD2/onoff/0" + wioToken)
+	}, t);
+}
 
+function vibrationSafe(t){
+		setTimeout(function(){$.post(serverURL + "GenericDOutD2/onoff/0" + wioToken)
+	}, t+4000);
+	$.post(serverURL + "GenericDOutD2/onoff/1" + wioToken)
+	//end vibration
+ 	setTimeout(function(){$.post(serverURL + "GenericDOutD2/onoff/0" + wioToken)
+	}, t);
+	setTimeout(function(){$.post(serverURL + "GenericDOutD2/onoff/0" + wioToken)
+	}, t+500);
+	setTimeout(function(){$.post(serverURL + "GenericDOutD2/onoff/0" + wioToken)
+	}, t+1000);
+
+}
+
+function vibrationOff(){
+	//end vibration
+ 	$.post(serverURL + "GenericDOutD2/onoff/0" + wioToken);
 }
 
 
 
+	//strombo
+	// $.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/250/10/10" + wioToken)
+	// setTimeout(function(){	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/10/250/10" + wioToken)
+	// }, 600);
+	// setTimeout(function(){	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/10/10/250" + wioToken)
+	// }, 1200);
 
+
+	// setTimeout(function(){
+	// 	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/250/10/10" + wioToken)
+	// 	setTimeout(function(){	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/10/250/10" + wioToken)
+	// 	}, 400);
+	// 	setTimeout(function(){	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/10/10/250" + wioToken)
+	// 	}, 800);
+	// 	setTimeout(function(){	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/0/0/0" + wioToken)
+	// 	}, 1200);
+
+	// },1800);

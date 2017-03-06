@@ -87,24 +87,24 @@ window.onload = function() {
 
 
 // library
-function lacouleurRouge(){
+function couleurRouge(){
 	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/250/0/0" + wioToken)
 
 
 }
-function lacouleurBlanche(){
+function couleurBlanche(){
 	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/250/250/250" + wioToken)
 
 
 }
 
-function lacouleurVerte(){
+function couleurVerte(){
 	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/0/250/0" + wioToken)
 
 
 }
 
-function lacouleurBleu(){
+function couleurBleu(){
 	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/0/0/250" + wioToken)
 
 

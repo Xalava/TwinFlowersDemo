@@ -92,6 +92,7 @@ function couleurRouge(){
 
 
 }
+
 function couleurBlanche(){
 	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/250/250/250" + wioToken)
 
@@ -101,8 +102,24 @@ function couleurBlanche(){
 function couleurVerte(){
 	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/0/250/0" + wioToken)
 
+}
+function clignoVert(){
+
+
+	var cligno;
+	setTimeout(function(){clearInterval(cligno)}, 10000);
+	setTimeout(function(){clearInterval(cligno)}, 11000);
+
+	cligno = setInterval(function(){
+		for (var i = 250; i >= 0; i--) {
+			$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/"+i+"/250/"+ i + wioToken)
+		}
+	}, 2000);
+
+
 
 }
+
 
 function couleurBleu(){
 	$.post(serverURL + "GroveLCDRGBI2C0/backlight_color_rgb/0/0/250" + wioToken)
@@ -110,40 +127,54 @@ function couleurBleu(){
 
 }
 
-function clignoLed() {
-	// f
-	var i = 1;
-	var cligno = setInterval(
-		function(){
-			$.post(serverURL + "GenericDOutD2/onoff/"+ i + wioToken);
-			i = 1-i;
-		},
-		800
-	);
+// function clignoLed() {
+// 	// f
+// 	var i = 1;
+// 	var cligno = setInterval(
+// 		function(){
+// 			$.post(serverURL + "GenericDOutD2/onoff/"+ i + wioToken);
+// 			i = 1-i;
+// 		},
+// 		800
+// 	);
 
 
-}
+// }
 
-function stopLed() {
+// function stopLed() {
 
-	clearInterval(cligno);
-	$.post(serverURL + "GenericDOutD2/onoff/0"+  wioToken);
-}
+// 	clearInterval(cligno);
+// 	$.post(serverURL + "GenericDOutD2/onoff/0"+  wioToken);
+// }
 
 
 
 function sendText() {
 	// body...
 	var m = $("#msgInput").val();
-	letexte ( m);
+	writeText ( m);
 	$("#msgInput").val("");
 	// alert("kmkmk");
 
 }
 
-function letexte(s){
+function joinDAO() {
+	clignoVert();
+	writeText("Join the Forest");
+}
+
+function writeText(s){
 		$.post(serverURL + "GroveLCDRGBI2C0/string/0/0/"+ s + wioToken)
 }
+
+
+function clearText(){
+		$.post(serverURL + "GroveLCDRGBI2C0/clear" + wioToken)
+}
+
+
+
+
 
 function vibration(t){
 	$.post(serverURL + "GenericDOutD2/onoff/1" + wioToken)

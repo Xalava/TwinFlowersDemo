@@ -159,8 +159,9 @@ function sendText() {
 }
 
 function joinDAO() {
-	clignoVert();
-	writeText("Join the Forest");
+	// clignoVert();
+	// writeText("Join the Forest");
+	$.post(serverURL + "GroveLCDRGBI2C0/string/0/0/Join_The_forest" + wioToken)
 }
 
 function writeText(s){

@@ -24,8 +24,12 @@ window.onload = function() {
 // Setup 
 var humidityPrec = 30;
 var temperaturePrec = 30;
+var moisturePrec = 30;
+
 var sonPrec = 30;
 var wioToken = "?access_token=13f643a259dfd43388885f7220aa1b91";
+var wioTokenO = "?access_token=26fa3b300b2d7ff215983f66e576fc45";
+
 var serverURL = "https://us.wio.seeed.io/v1/node/";
 var cligno;
 
@@ -61,6 +65,20 @@ setInterval(
 			temperaturePrec = data.celsius_degree;	
 
     	});
+
+		$.get(serverURL + "GroveMoistureA0/moisture" + wioTokenO, function(data, status){
+    		var temp = (data.moisture/10+moisturePrec)/2-2;
+
+			$(".tempo").html(temp.toString());
+
+    		$('.tempo-bar').css('width', temp+'%');
+    		if (temp>30){
+					$('.tempo-bar').css('background-color',"red");
+				}
+			moisturePrec = data.moisture/10;	
+
+    	});
+
 
 			// $.get(serverURL + "GroveSoundA0/sound_level" + wioToken, function(data, status){
    //  		var son = (data.sound_level+sonPrec)/2;
@@ -127,25 +145,37 @@ function couleurBleu(){
 
 }
 
-// function clignoLed() {
-// 	// f
-// 	var i = 1;
-// 	var cligno = setInterval(
-// 		function(){
-// 			$.post(serverURL + "GenericDOutD2/onoff/"+ i + wioToken);
-// 			i = 1-i;
-// 		},
-// 		800
-// 	);
+function allumerLed() {
+
+	// clearInterval(cligno);
+	$.post(serverURL + "GenericDOutD2/onoff/1"+  wioTokenO);
+}
+
+var clignoLed;
+function clignoLed() {
+	// f
+	var i = 1;
+	clignoLed = setInterval(
+		function(){
+			$.post(serverURL + "GenericDOutD2/onoff/"+ i + wioTokenO);
+			i = 1-i;
+		},
+		800
+	);
+
+	setTimeout(
+		function(){ clearInterval(clignoLed);}, 
+		4000
+	);
 
 
-// }
+}
 
-// function stopLed() {
+function stopLed() {
 
-// 	clearInterval(cligno);
-// 	$.post(serverURL + "GenericDOutD2/onoff/0"+  wioToken);
-// }
+	clearInterval(clignoLed);
+	$.post(serverURL + "GenericDOutD2/onoff/0"+  wioTokenO);
+}
 
 
 

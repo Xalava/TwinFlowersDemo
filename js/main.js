@@ -1,8 +1,8 @@
-// Web3js
-var Web3 = require('web3');
-var web3 = new Web3();
-web3.setProvider(new web3.providers.HttpProvider());
-var twinSpirit = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"contributors","outputs":[{"name":"addr","type":"address"},{"name":"amount","type":"uint256"},{"name":"name","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"}],"name":"getContributor","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"donatorName","type":"string"}],"name":"openDonation","outputs":[],"payable":false,"type":"function"},{"inputs":[],"type":"constructor"}]).at("0x8be41da759e242fdf3a01029ef113d3282d7a6c5");
+// // Web3js
+// var Web3 = require('web3');
+// var web3 = new Web3();
+// web3.setProvider(new web3.providers.HttpProvider());
+// var twinSpirit = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"contributors","outputs":[{"name":"addr","type":"address"},{"name":"amount","type":"uint256"},{"name":"name","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"index","type":"uint256"}],"name":"getContributor","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"donatorName","type":"string"}],"name":"openDonation","outputs":[],"payable":false,"type":"function"},{"inputs":[],"type":"constructor"}]).at("0x8be41da759e242fdf3a01029ef113d3282d7a6c5");
 
 function donatorsList(){
     var donators = twinSpirit.contributors;
@@ -14,9 +14,9 @@ function donatorsList(){
 };
 
 
-window.onload = function() {
-    document.getElementById("sculptureName").innerHTML = twinSpirit.getContributor(0);
-}
+// window.onload = function() {
+//     document.getElementById("sculptureName").innerHTML = twinSpirit.getContributor(0);
+// }
 
 
 // us.wio interaction

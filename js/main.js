@@ -151,11 +151,11 @@ function allumerLed() {
 	$.post(serverURL + "GenericDOutD2/onoff/1"+  wioTokenO);
 }
 
-var clignoLed;
+var clignoLedInterval;
 function clignoLed() {
 	// f
 	var i = 1;
-	clignoLed = setInterval(
+	clignoLedInterval = setInterval(
 		function(){
 			$.post(serverURL + "GenericDOutD2/onoff/"+ i + wioTokenO);
 			i = 1-i;
@@ -164,7 +164,7 @@ function clignoLed() {
 	);
 
 	setTimeout(
-		function(){ clearInterval(clignoLed);}, 
+		function(){ clearInterval(clignoLedInterval);}, 
 		4000
 	);
 
